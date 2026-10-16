@@ -1,0 +1,160 @@
+<footer class="relative bg-[#0d0d10] text-neutral-300 border-t border-neutral-800/80 mt-auto overflow-hidden">
+  <div class="absolute -top-24 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-12 border-b border-neutral-800/80">
+      
+      <div class="space-y-4">
+        <a routerLink="/" class="inline-flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
+            ع
+          </div>
+          <span class="text-xl font-bold text-white tracking-tight group-hover:text-orange-400 transition-colors">عَدَسَة</span>
+        </a>
+        <p class="text-sm text-neutral-400 leading-relaxed">
+          منصة معرفية مخصصة لعشاق ومحترفي التصوير الفوتوغرافي، نجمع لك أفضل الدروس، نصائح الإضاءة، والتقنيات المعاصرة لتطوير مهاراتك البصرية.
+        </p>
+        <div class="flex items-center gap-2 pt-2">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+            class="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-orange-500/50 hover:bg-orange-500/10 transition-all"
+          >
+            <i class="fa-brands fa-x-twitter text-sm"></i>
+          </a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-orange-500/50 hover:bg-orange-500/10 transition-all"
+          >
+            <i class="fa-brands fa-github text-sm"></i>
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-orange-500/50 hover:bg-orange-500/10 transition-all"
+          >
+            <i class="fa-brands fa-instagram text-sm"></i>
+          </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            class="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-orange-500/50 hover:bg-orange-500/10 transition-all"
+          >
+            <i class="fa-brands fa-youtube text-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
+          <span class="w-1.5 h-4 bg-orange-500 rounded-full"></span>
+          روابط سريعة
+        </h3>
+        <ul class="space-y-2.5 text-sm text-neutral-400">
+          <li>
+            <a routerLink="/" class="hover:text-orange-400 transition-colors inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-angle-left text-xs text-neutral-600"></i>
+              الرئيسية
+            </a>
+          </li>
+          <li>
+            <a routerLink="/blog" class="hover:text-orange-400 transition-colors inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-angle-left text-xs text-neutral-600"></i>
+              أرشيف المقالات
+            </a>
+          </li>
+          <li>
+            <a routerLink="/about" class="hover:text-orange-400 transition-colors inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-angle-left text-xs text-neutral-600"></i>
+              من نحن
+            </a>
+          </li>
+          <li>
+            <a routerLink="/privacy" class="hover:text-orange-400 transition-colors inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-angle-left text-xs text-neutral-600"></i>
+              سياسة الخصوصية
+            </a>
+          </li>
+          <li>
+            <a routerLink="/terms" class="hover:text-orange-400 transition-colors inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-angle-left text-xs text-neutral-600"></i>
+              شروط الاستخدام
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
+          <span class="w-1.5 h-4 bg-orange-500 rounded-full"></span>
+          أقسام المدونة
+        </h3>
+        <ul class="space-y-2.5 text-sm text-neutral-400">
+          @for (cat of categories; track cat.name) {
+            <li>
+              <a
+                [routerLink]="['/blog']"
+                [queryParams]="{ category: cat.name }"
+                class="hover:text-orange-400 transition-colors inline-flex items-center justify-between w-full group"
+              >
+                <span class="inline-flex items-center gap-1.5">
+                  <i class="fa-solid fa-camera text-xs text-neutral-600 group-hover:text-orange-500 transition-colors"></i>
+                  {{ cat.name }}
+                </span>
+                <span class="text-xs bg-neutral-900 border border-neutral-800 px-2 py-0.5 rounded-full text-neutral-500 group-hover:text-orange-400 group-hover:border-orange-500/30">
+                  {{ cat.count }}
+                </span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
+          <span class="w-1.5 h-4 bg-orange-500 rounded-full"></span>
+          النشرة البريدية
+        </h3>
+        <p class="text-sm text-neutral-400 mb-4 leading-relaxed">
+          اشترك ليصلك أحدث المقالات والنصائح الاحترافية أسبوعياً في بريدك الإلكتروني.
+        </p>
+        <div class="space-y-2">
+          <div class="relative">
+            <input
+              type="email"
+              placeholder="بريدك الإلكتروني..."
+              class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500 transition-colors"
+            />
+          </div>
+          <button
+            type="button"
+            class="custom-btn-primary w-full text-sm py-2.5 cursor-pointer"
+          >
+            <span>اشتراك مجاني</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+      <p>© {{ currentYear }} منصة عَدَسَة. جميع الحقوق محفوظة.</p>
+      <div class="flex items-center gap-6">
+        <a routerLink="/privacy" class="hover:text-neutral-300 transition-colors">الخصوصية</a>
+        <span class="text-neutral-700">•</span>
+        <a routerLink="/terms" class="hover:text-neutral-300 transition-colors">الشروط والأحكام</a>
+      </div>
+    </div>
+
+  </div>
+</footer>

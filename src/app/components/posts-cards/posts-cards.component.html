@@ -1,0 +1,190 @@
+<section class="sticky top-20 z-30 bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-neutral-800/80 transition-all">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <div class="relative w-full md:w-80">
+        <input
+          #searchInput
+          type="text"
+          [value]="searchQuery"
+          (input)="onSearch(searchInput.value)"
+          placeholder="ابحث بالعنوان أو الكلمات الدلالية..."
+          class="w-full bg-[#131316] text-white placeholder-neutral-500 text-sm rounded-xl pl-10 pr-11 py-2.5 border border-neutral-800 focus:outline-none focus:border-orange-500 transition-colors shadow-inner"
+        />
+        <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 text-sm"></i>
+        
+        @if (searchQuery) {
+          <button
+            type="button"
+            (click)="onSearch(''); searchInput.value = ''"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white transition-colors"
+            title="مسح البحث"
+          >
+            <i class="fa-solid fa-circle-xmark text-sm"></i>
+          </button>
+        }
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          (click)="selectCategory(null)"
+          class="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer"
+          [class]="
+            !selectedCategoryName
+              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md shadow-orange-950/30'
+              : 'bg-[#141417] text-neutral-400 border border-neutral-800 hover:border-neutral-700 hover:text-neutral-200'
+          "
+        >
+          الكل ({{ allPosts.length }})
+        </button>
+
+        @for (cat of categories; track cat.name) {
+          <button
+            type="button"
+            (click)="selectCategory(cat.name)"
+            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer"
+            [class]="
+              selectedCategoryName === cat.name
+                ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md shadow-orange-950/30'
+                : 'bg-[#141417] text-neutral-400 border border-neutral-800 hover:border-neutral-700 hover:text-neutral-200'
+            "
+          >
+            {{ cat.name }} ({{ cat.count }})
+          </button>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+    <div class="flex items-center gap-2 text-sm text-neutral-400">
+      <span>عرض</span>
+      <span class="font-bold text-white">{{ filteredPosts.length }}</span>
+      <span>مقالة</span>
+      @if (selectedCategoryName) {
+        <span class="text-neutral-500">في تصنيف</span>
+        <span class="font-bold text-orange-400">"{{ selectedCategoryName }}"</span>
+      }
+      @if (searchQuery) {
+        <span class="text-neutral-500">للبحث</span>
+        <span class="font-bold text-orange-400">"{{ searchQuery }}"</span>
+      }
+    </div>
+
+    <div class="flex items-center gap-3">
+      @if (selectedCategoryName || searchQuery) {
+        <button
+          type="button"
+          (click)="clearFilters()"
+          class="text-xs text-neutral-400 hover:text-orange-400 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+        >
+          <i class="fa-solid fa-filter-circle-xmark"></i>
+          إعادة تعيين الفلاتر
+        </button>
+      }
+
+      <div class="flex items-center bg-[#131316] border border-neutral-800 rounded-xl p-1 gap-1">
+        <button
+          type="button"
+          (click)="toggleView(false)"
+          [class]="!isListView ? 'bg-orange-500 text-white shadow-xs' : 'text-neutral-400 hover:text-white'"
+          class="p-2 rounded-lg text-sm transition-all cursor-pointer"
+          title="عرض شبكي"
+          aria-label="عرض شبكي"
+        >
+          <i class="fa-solid fa-table-cells-large"></i>
+        </button>
+        <button
+          type="button"
+          (click)="toggleView(true)"
+          [class]="isListView ? 'bg-orange-500 text-white shadow-xs' : 'text-neutral-400 hover:text-white'"
+          class="p-2 rounded-lg text-sm transition-all cursor-pointer"
+          title="عرض قائمة"
+          aria-label="عرض قائمة"
+        >
+          <i class="fa-solid fa-list"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (paginatedPosts.length > 0) {
+    <div [class]="isListView ? 'flex flex-col gap-6' : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-7'">
+      @for (item of paginatedPosts; track item.id) {
+        <app-post-card [post]="item" [isListView]="isListView"></app-post-card>
+      }
+    </div>
+  } @else {
+    <div class="text-center py-20 bg-[#121215] border border-neutral-800/80 rounded-2xl max-w-xl mx-auto px-6">
+      <div class="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center mx-auto mb-4 text-neutral-500">
+        <i class="fa-solid fa-camera-slash text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">لم نجد أي مقالات مطابقة</h3>
+      <p class="text-sm text-neutral-400 mb-6 leading-relaxed">
+        حاول البحث بكلمات دلالية أخرى أو قم بإلغاء الفلترة لعرض كافة المقالات المتاحة.
+      </p>
+      <button
+        type="button"
+        (click)="clearFilters()"
+        class="custom-btn-primary cursor-pointer"
+      >
+        <span>عرض كل المقالات</span>
+        <i class="fa-solid fa-rotate-right text-xs"></i>
+      </button>
+    </div>
+  }
+
+  @if (totalPages > 1) {
+    <div class="mt-14 flex flex-col items-center gap-3">
+      <div class="flex items-center gap-1.5">
+        
+        <button
+          type="button"
+          (click)="changePage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          class="p-2.5 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
+          title="الصفحة السابقة"
+          aria-label="الصفحة السابقة"
+        >
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+
+        @for (page of pageNumbers; track page) {
+          <button
+            type="button"
+            (click)="changePage(page)"
+            class="min-w-10 h-10 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer"
+            [class]="
+              currentPage === page
+                ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md shadow-orange-950/40'
+                : 'bg-[#141417] text-neutral-400 border border-neutral-800 hover:border-neutral-700 hover:text-white'
+            "
+          >
+            {{ page }}
+          </button>
+        }
+
+        <button
+          type="button"
+          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+          class="p-2.5 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
+          title="الصفحة التالية"
+          aria-label="الصفحة التالية"
+        >
+          <i class="fa-solid fa-chevron-left text-xs"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-neutral-500">
+        صفحة {{ currentPage }} من إجمالي {{ totalPages }}
+      </p>
+    </div>
+  }
+
+</section>

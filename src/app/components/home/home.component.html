@@ -1,0 +1,161 @@
+<div class="bg-[#0a0a0a] min-h-screen text-neutral-100 overflow-hidden">
+
+  <section class="relative min-h-[85vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 border-b border-neutral-800/80 bg-gradient-to-b from-[#131317] via-[#0c0c0e] to-[#0a0a0a]">
+    
+    <div class="absolute top-16 left-12 w-80 h-80 bg-orange-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-12 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="relative max-w-5xl mx-auto text-center z-10">
+      
+      <div class="custom-badge mb-6 inline-flex">
+        <span class="w-2 h-2 rounded-full bg-orange-400 animate-ping"></span>
+        <span class="w-2 h-2 rounded-full bg-orange-500 -mr-3.5"></span>
+        <span class="text-xs font-semibold">مرحباً بك في منصة عَدَسَة</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight mb-6">
+        اكتشف سحر <span class="text-gradient-gold">الضوء والعدسة</span><br />
+        واحترف فن التصوير
+      </h1>
+
+      <p class="text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed mb-10">
+        دليلك العربي الشامل لتعلم أسرار الإضاءة، ضبط الكاميرا، والتكوين البصري مع نخبة من المصورين المحترفين.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+        <a routerLink="/blog" class="custom-btn-primary w-full sm:w-auto">
+          <span>استكشف المقالات</span>
+          <i class="fa-solid fa-arrow-left text-xs"></i>
+        </a>
+        <a routerLink="/about" class="custom-btn-secondary w-full sm:w-auto">
+          <i class="fa-solid fa-circle-info text-xs"></i>
+          <span>عن المنصة</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="custom-card p-5 text-center">
+          <i class="fa-solid fa-newspaper text-xl text-orange-400 mb-1.5"></i>
+          <p class="text-2xl sm:text-3xl font-extrabold text-white">+50</p>
+          <p class="text-xs text-neutral-400">مقالة متخصصة</p>
+        </div>
+        <div class="custom-card p-5 text-center">
+          <i class="fa-solid fa-users text-xl text-orange-400 mb-1.5"></i>
+          <p class="text-2xl sm:text-3xl font-extrabold text-white">+10k</p>
+          <p class="text-xs text-neutral-400">قارئ شغوف</p>
+        </div>
+        <div class="custom-card p-5 text-center">
+          <i class="fa-solid fa-camera text-xl text-orange-400 mb-1.5"></i>
+          <p class="text-2xl sm:text-3xl font-extrabold text-white">4</p>
+          <p class="text-xs text-neutral-400">أقسام رئيسية</p>
+        </div>
+        <div class="custom-card p-5 text-center">
+          <i class="fa-solid fa-award text-xl text-orange-400 mb-1.5"></i>
+          <p class="text-2xl sm:text-3xl font-extrabold text-white">100%</p>
+          <p class="text-xs text-neutral-400">محتوى مجاني</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="custom-badge mb-2">
+          <i class="fa-solid fa-star text-orange-400"></i>
+          <span>المحتوى المميز</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">أبرز المقالات المختارة</h2>
+        <p class="text-xs sm:text-sm text-neutral-400 mt-1">مقالات لا غنى عنها لكل مصور يبحث عن التميز والإبداع</p>
+      </div>
+      <a routerLink="/blog" class="text-xs sm:text-sm font-semibold text-orange-400 hover:text-orange-300 transition-colors inline-flex items-center gap-1.5">
+        <span>عرض كل المقالات</span>
+        <i class="fa-solid fa-arrow-left text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      @for (item of featuredArticles; track item.id) {
+        <app-post-card [post]="item"></app-post-card>
+      }
+    </div>
+  </section>
+
+  <section class="py-16 bg-[#0f0f13] border-y border-neutral-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="custom-badge mb-3">
+          <i class="fa-solid fa-layer-group text-orange-400"></i>
+          <span>تصنيفات المحتوى</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">استكشف حسب اهتمامك</h2>
+        <p class="text-xs sm:text-sm text-neutral-400">اختر القسم الذي ترغب في تطوير مهاراتك فيه وابدأ القراءة فوراً</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        @for (category of categoriesList; track category.name) {
+          <a
+            [routerLink]="['/blog']"
+            [queryParams]="{ category: category.name }"
+            class="custom-card p-6 flex flex-col items-center text-center group cursor-pointer"
+          >
+            <div class="w-14 h-14 rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-orange-500/50 transition-all duration-300">
+              <i [class]="getCategoryIconClass(category.name) + ' text-2xl'"></i>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-orange-400 transition-colors text-base mb-1">
+              {{ category.name }}
+            </h3>
+            <p class="text-xs text-neutral-500">{{ category.count }} مقالات منشورة</p>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="custom-badge mb-2">
+          <i class="fa-solid fa-bolt text-orange-400"></i>
+          <span>أحدث الإضافات</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">جديد منصة عدسة</h2>
+        <p class="text-xs sm:text-sm text-neutral-400 mt-1">تابع آخر الشروحات والتقنيات التي تمت إضافتها مؤخراً</p>
+      </div>
+      <a routerLink="/blog" class="text-xs sm:text-sm font-semibold text-orange-400 hover:text-orange-300 transition-colors inline-flex items-center gap-1.5">
+        <span>تصفح الأرشيف</span>
+        <i class="fa-solid fa-arrow-left text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      @for (item of latestArticles; track item.id) {
+        <app-post-card [post]="item"></app-post-card>
+      }
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div class="relative rounded-3xl p-8 sm:p-12 overflow-hidden bg-gradient-to-r from-orange-600/20 via-amber-600/10 to-neutral-900 border border-orange-500/30 text-center">
+      <div class="relative z-10 max-w-xl mx-auto">
+        <i class="fa-solid fa-envelope-open-text text-3xl text-orange-400 mb-4"></i>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">انضم إلى مجتمع مصوري عدسة</h2>
+        <p class="text-xs sm:text-sm text-neutral-300 mb-6 leading-relaxed">
+          اشترك في النشرة الأسبوعية وتلقَ أفضل النصائح وتقنيات التصوير مجاناً مباشرة إلى بريدك.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center gap-2">
+          <input
+            type="email"
+            placeholder="أدخل بريدك الإلكتروني..."
+            class="w-full bg-[#0a0a0a]/80 border border-neutral-700 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500 transition-colors"
+          />
+          <button type="button" class="custom-btn-primary w-full sm:w-auto whitespace-nowrap cursor-pointer">
+            <span>اشترك الآن</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
